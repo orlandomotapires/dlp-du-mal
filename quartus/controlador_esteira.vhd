@@ -38,11 +38,10 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity controlador_esteira is
     generic (
-        C        : integer := 30;          -- Capacidade (20 <= C <= 79)
-        L        : integer := 25;          -- Limiar de alerta (1 <= L < C)
+        C        : integer := 50;          -- Capacidade (20 <= C <= 79)
+        L        : integer := 40;          -- Limiar de alerta (1 <= L < C)
         F        : integer := 1;           -- Frequência em Hz (1, 2 ou 5)
-        CLK_FREQ : integer := 50_000_000;  -- 50 MHz
-        H_SIM    : integer := 0            -- 0 = valor real; >= 2 = simulação reduzida
+        CLK_FREQ : integer := 50_000_000   -- 50 MHz
     );
     port (
         clk_50   : in  std_logic;
@@ -64,21 +63,12 @@ end entity;
 
 architecture rtl of controlador_esteira is
 
-    -- H = ciclos de clk_50 por semiciclo = CLK_FREQ / (2*F)
+    -- Ciclos de clk_50 por semiciclo = CLK_FREQ / (2*F)
     -- F=1 -> 25.000.000 | F=2 -> 12.500.000 | F=5 -> 5.000.000
-    function calc_h(h_sim, clk_freq, f : integer) return integer is
-    begin
-        if h_sim = 0 then
-            return clk_freq / (2 * f);
-        else
-            return h_sim;
-        end if;
-    end function;
-
-    constant H : integer := calc_h(H_SIM, CLK_FREQ, F);
+    constant METADE_PERIODO : integer := CLK_FREQ / (2 * F);
 
     -- 1. Divisor
-    signal cont_div     : integer range 0 to H - 1 := 0;
+    signal cont_div     : integer range 0 to METADE_PERIODO - 1 := 0;
     signal sinal_div    : std_logic := '0';
     signal pulso_avanco : std_logic := '0';
 
@@ -99,7 +89,7 @@ begin
 
     ------------------------------------------------------------------
     -- 1. DIVISOR DE FREQUÊNCIA
-    -- Contador síncrono + comparador (cont = H-1) + FF T (sinal_div)
+    -- Contador síncrono + comparador (cont = METADE_PERIODO-1) + FF T (sinal_div)
     -- pulso_avanco é um FF D: sobe junto com a borda de subida de
     -- sinal_div e dura 1 ciclo de clk_50.
     -- pausa = 1: contador, sinal_div e pulso voltam ao estado inicial.
@@ -116,7 +106,7 @@ begin
             if pausa = '1' then
                 cont_div  <= 0;
                 sinal_div <= '0';
-            elsif cont_div = H - 1 then
+            elsif cont_div = METADE_PERIODO - 1 then
                 cont_div  <= 0;
                 sinal_div <= not sinal_div;           -- FF T
                 if sinal_div = '0' then               -- vai subir agora
