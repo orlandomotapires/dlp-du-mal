@@ -1,0 +1,3 @@
+1 18 decodificador_7seg 3 rtl 76 C:/Users/Orlando Mota Pires/AppData/Local/quartus/simulation/questa/rtl_work 1 65 0 0 32 0
+1 19 controlador_esteira 3 rtl 76 C:/Users/Orlando Mota Pires/AppData/Local/quartus/simulation/questa/rtl_work 1 65 0 0 270 0
+1 22 tb_controlador_esteira 3 sim 76 C:/Users/Orlando Mota Pires/AppData/Local/quartus/simulation/questa/rtl_work 1 65 2048 0 2673 0

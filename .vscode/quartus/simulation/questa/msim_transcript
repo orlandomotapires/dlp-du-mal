@@ -1,0 +1,323 @@
+# Reading pref.tcl
+# //  Questa Altera Starter FPGA Edition-64
+# //  Version 2025.2 win64 May 31 2025
+# //
+# // Unpublished work. Copyright 2025 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# do controlador_esteira_run_msim_rtl_vhdl.do
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Questa Altera Starter FPGA Edition-64 vmap 2025.2 Lib Mapping Utility 2025.05 May 31 2025
+# vmap work rtl_work 
+# ** Note: (vmap-220) 'c:/altera_lite/25.1std/questa_fse/win64/../modelsim.ini' is used as the ini file.
+# Copying c:/altera_lite/25.1std/questa_fse/win64/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# 
+# vcom -93 -work work {C:/Users/Orlando Mota Pires/AppData/Local/quartus/controlador_esteira.vhd}
+# Questa Altera Starter FPGA Edition-64 vcom 2025.2 Compiler 2025.05 May 31 2025
+# Start time: 19:07:03 on Oct 13,2026
+# vcom -reportprogress 300 -93 -work work C:/Users/Orlando Mota Pires/AppData/Local/quartus/controlador_esteira.vhd 
+# ** Note: (vcom-220) 'modelsim.ini' is used as the ini file.
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity decodificador_7seg
+# -- Compiling architecture rtl of decodificador_7seg
+# -- Compiling entity controlador_esteira
+# -- Compiling architecture rtl of controlador_esteira
+# -- Loading entity decodificador_7seg
+# End time: 19:07:03 on Oct 13,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+# vcom -93 -work work {C:/Users/Orlando Mota Pires/AppData/Local/quartus/tb_controlador_esteira.vhd}
+# Questa Altera Starter FPGA Edition-64 vcom 2025.2 Compiler 2025.05 May 31 2025
+# Start time: 19:07:03 on Oct 13,2026
+# vcom -reportprogress 300 -93 -work work C:/Users/Orlando Mota Pires/AppData/Local/quartus/tb_controlador_esteira.vhd 
+# ** Note: (vcom-220) 'modelsim.ini' is used as the ini file.
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_controlador_esteira
+# -- Compiling architecture sim of tb_controlador_esteira
+# -- Loading entity controlador_esteira
+# -- Loading entity decodificador_7seg
+# End time: 19:07:03 on Oct 13,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+# vsim -t 1ps -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L cyclonev -L cyclonev_hssi -L rtl_work -L work -voptargs="+acc"  tb_controlador_esteira
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim -t 1ps -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L cyclonev -L cyclonev_hssi -L rtl_work -L work -voptargs=""+acc"" tb_controlador_esteira 
+# Start time: 19:07:04 on Oct 13,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10908) Some optimizations are turned off because the +acc switch is in effect.
+# ** Note: (vopt-220) 'modelsim.ini' is used as the ini file.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.tb_controlador_esteira(sim)#1
+# Loading work.controlador_esteira(rtl)#1
+# Loading work.decodificador_7seg(rtl)#1
+# 
+# add wave *
+# view structure
+# .main_pane.structure.interior.cs.body.struct
+# view signals
+# .main_pane.objects.interior.cs.body.tree
+# run -all
+# 
+#####################################################################################
+#  DEBUG DA ESTEIRA - clock REAL de 50 MHz, sem parametros reduzidos
+#####################################################################################
+#  Parametros: C=30  L=25  F=1 Hz  clock=50 MHz
+#  Divisor: semiciclo = 25000000 ciclos de clk = 500 ms | periodo de sinal_div = 1000 ms | contador conta de 0 a 24999999
+#  Cada avanco da esteira leva 1000 ms de tempo simulado.
+#  Legenda: CENARIO / ENTRADA / DIVISOR / NUCLEO (regra do PDF) / SAIDAS (hardware) / CONFERE / FALHA
+# 
+# =====================================================================================
+#  ETAPA 1: RESET E ESTADO INICIAL
+# =====================================================================================
+#  REGRA: rst=1 zera N, P, erro e o divisor. Apos o reset: modos 00 e 10 mostram 00; modos 01 e 11 mostram C.
+# [  0.000000 s] ENTRADA  rst = 1  RESET ASSINCRONO: zera N, P, erro e divisor na hora, sem esperar o clock
+# [  0.000000 s] SAIDAS   display = 00 (modo 00) | LEDs: cheio=0 vazio=1 alerta=0 erro=0  [OK: igual ao modelo]
+# [  0.000000 s] DIVISOR  divisor liberado: contador em 0, sinal_div em 0 (conta 25000000 bordas ate a 1a subida)
+# [  0.000000 s] ENTRADA  rst = 0  reset liberado
+# [  0.000000 s] CONFERE  N apos o reset [modo 00]: previsto=0  observado=0  -> OK
+# [  0.000000 s] CONFERE  C - N apos o reset [modo 01]: previsto=30  observado=30  -> OK
+# [  0.000000 s] CONFERE  P apos o reset [modo 10]: previsto=0  observado=0  -> OK
+# [  0.000000 s] CONFERE  C apos o reset [modo 11]: previsto=30  observado=30  -> OK
+# [  0.000000 s] CONFERE  LED vazio: previsto=1  observado=1  -> OK
+# [  0.000000 s] CONFERE  LED cheio: previsto=0  observado=0  -> OK
+# [  0.000000 s] CONFERE  LED alerta: previsto=0  observado=0  -> OK
+# [  0.000000 s] CONFERE  LED erro: previsto=0  observado=0  -> OK
+# [  0.000000 s] CONFERE  LED sinal_div: previsto=0  observado=0  -> OK
+# 
+# =====================================================================================
+#  ETAPA 2: DIVISOR DE FREQUENCIA E CONTAGEM CRESCENTE (colocar pecas)
+# =====================================================================================
+#  REGRA: sinal_div: onda quadrada de F Hz com 50% de duty; 1a subida apos 1 semiciclo. Cada subida gera 1 pulso_avanco e N+1.
+# [  0.500000 s] DIVISOR  sinal_div SOBE (1a subida) apos 25000000 bordas de clk = 1 semiciclo (esperado 25000000)  [OK]
+# [  0.500000 s] DIVISOR              pulso_avanco = 1 durante 1 ciclo de clk (20 ns); o nucleo o consome na proxima borda
+# [  0.500000 s] CONFERE  N apos a subida 1: previsto=1  observado=1  -> OK
+# [  0.500000 s] NUCLEO   pulso_avanco CONSUMIDO: sentido=colocar e N<C  -> N+1 (P acompanha se for novo recorde)
+# [  0.500000 s] NUCLEO   N: 0 -> 1 | P: 0 -> 1 | erro: 0 -> 0
+# [  0.500000 s] SAIDAS   display = 01 (modo 00) | LEDs: cheio=0 vazio=0 alerta=0 erro=0  [OK: igual ao modelo]
+# [  0.500000 s] CONFERE  P acompanha o maior N [modo 10]: previsto=1  observado=1  -> OK
+# [  1.000000 s] DIVISOR  sinal_div DESCE: tempo em alto = 500 ms (esperado 500 ms, duty 50%)  [OK]
+# [  1.500000 s] DIVISOR  sinal_div SOBE: periodo = 1000 ms (esperado 1000 ms, F = 1 Hz)  [OK]
+# [  1.500000 s] DIVISOR              tempo em baixo = 500 ms (esperado 500 ms)  [OK]
+# [  1.500000 s] DIVISOR              pulso_avanco = 1 durante 1 ciclo de clk (20 ns); o nucleo o consome na proxima borda
+# [  1.500000 s] CONFERE  N apos a subida 2: previsto=2  observado=2  -> OK
+# [  1.500000 s] NUCLEO   pulso_avanco CONSUMIDO: sentido=colocar e N<C  -> N+1 (P acompanha se for novo recorde)
+# [  1.500000 s] NUCLEO   N: 1 -> 2 | P: 1 -> 2 | erro: 0 -> 0
+# [  1.500000 s] SAIDAS   display = 02 (modo 00) | LEDs: cheio=0 vazio=0 alerta=0 erro=0  [OK: igual ao modelo]
+# [  1.500000 s] CONFERE  P acompanha o maior N [modo 10]: previsto=2  observado=2  -> OK
+# [  2.000000 s] DIVISOR  sinal_div DESCE: tempo em alto = 500 ms (esperado 500 ms, duty 50%)  [OK]
+# [  2.500000 s] DIVISOR  sinal_div SOBE: periodo = 1000 ms (esperado 1000 ms, F = 1 Hz)  [OK]
+# [  2.500000 s] DIVISOR              tempo em baixo = 500 ms (esperado 500 ms)  [OK]
+# [  2.500000 s] DIVISOR              pulso_avanco = 1 durante 1 ciclo de clk (20 ns); o nucleo o consome na proxima borda
+# [  2.500000 s] CONFERE  N apos a subida 3: previsto=3  observado=3  -> OK
+# [  2.500000 s] NUCLEO   pulso_avanco CONSUMIDO: sentido=colocar e N<C  -> N+1 (P acompanha se for novo recorde)
+# [  2.500000 s] NUCLEO   N: 2 -> 3 | P: 2 -> 3 | erro: 0 -> 0
+# [  2.500000 s] SAIDAS   display = 03 (modo 00) | LEDs: cheio=0 vazio=0 alerta=0 erro=0  [OK: igual ao modelo]
+# [  2.500000 s] CONFERE  P acompanha o maior N [modo 10]: previsto=3  observado=3  -> OK
+# [  3.000000 s] DIVISOR  sinal_div DESCE: tempo em alto = 500 ms (esperado 500 ms, duty 50%)  [OK]
+# [  3.500000 s] DIVISOR  sinal_div SOBE: periodo = 1000 ms (esperado 1000 ms, F = 1 Hz)  [OK]
+# [  3.500000 s] DIVISOR              tempo em baixo = 500 ms (esperado 500 ms)  [OK]
+# [  3.500000 s] DIVISOR              pulso_avanco = 1 durante 1 ciclo de clk (20 ns); o nucleo o consome na proxima borda
+# [  3.500000 s] CONFERE  N apos a subida 4: previsto=4  observado=4  -> OK
+# [  3.500000 s] NUCLEO   pulso_avanco CONSUMIDO: sentido=colocar e N<C  -> N+1 (P acompanha se for novo recorde)
+# [  3.500000 s] NUCLEO   N: 3 -> 4 | P: 3 -> 4 | erro: 0 -> 0
+# [  3.500000 s] SAIDAS   display = 04 (modo 00) | LEDs: cheio=0 vazio=0 alerta=0 erro=0  [OK: igual ao modelo]
+# [  3.500000 s] CONFERE  P acompanha o maior N [modo 10]: previsto=4  observado=4  -> OK
+# 
+# =====================================================================================
+#  ETAPA 3: RETIRAR PECAS E TROCAR O SENTIDO ENTRE AVANCOS
+# =====================================================================================
+#  REGRA: sentido=1 e N>0 decrementa. Trocar o sentido nao altera N na hora nem reinicia o divisor; vale so no proximo pulso. P nao diminui.
+# [  3.500000 s] ENTRADA  sentido = 1  (retirar pecas)  - so e usado quando um pulso for consumido
+# [  4.000000 s] DIVISOR  sinal_div DESCE: tempo em alto = 500 ms (esperado 500 ms, duty 50%)  [OK]
+# [  4.500000 s] DIVISOR  sinal_div SOBE: periodo = 1000 ms (esperado 1000 ms, F = 1 Hz)  [OK]
+# [  4.500000 s] DIVISOR              tempo em baixo = 500 ms (esperado 500 ms)  [OK]
+# [  4.500000 s] DIVISOR              pulso_avanco = 1 durante 1 ciclo de clk (20 ns); o nucleo o consome na proxima borda
+# [  4.500000 s] CONFERE  N apos retirar: previsto=3  observado=3  -> OK
+# [  4.500000 s] NUCLEO   pulso_avanco CONSUMIDO: sentido=retirar e N>0  -> N-1
+# [  4.500000 s] NUCLEO   N: 4 -> 3 | P: 4 -> 4 | erro: 0 -> 0
+# [  4.500000 s] SAIDAS   display = 03 (modo 00) | LEDs: cheio=0 vazio=0 alerta=0 erro=0  [OK: igual ao modelo]
+# [  4.500000 s] CONFERE  P preservado na retirada [modo 10]: previsto=4  observado=4  -> OK
+# [  5.000000 s] DIVISOR  sinal_div DESCE: tempo em alto = 500 ms (esperado 500 ms, duty 50%)  [OK]
+# [  5.500000 s] DIVISOR  sinal_div SOBE: periodo = 1000 ms (esperado 1000 ms, F = 1 Hz)  [OK]
+# [  5.500000 s] DIVISOR              tempo em baixo = 500 ms (esperado 500 ms)  [OK]
+# [  5.500000 s] DIVISOR              pulso_avanco = 1 durante 1 ciclo de clk (20 ns); o nucleo o consome na proxima borda
+# [  5.500000 s] CONFERE  N apos retirar: previsto=2  observado=2  -> OK
+# [  5.500000 s] CENARIO  trocando o sentido para colocar, entre dois avancos
+# [  5.500000 s] NUCLEO   pulso_avanco CONSUMIDO: sentido=retirar e N>0  -> N-1
+# [  5.500000 s] NUCLEO   N: 3 -> 2 | P: 4 -> 4 | erro: 0 -> 0
+# [  5.500000 s] SAIDAS   display = 02 (modo 00) | LEDs: cheio=0 vazio=0 alerta=0 erro=0  [OK: igual ao modelo]
+# [  5.500000 s] ENTRADA  sentido = 0  (colocar pecas)  - so e usado quando um pulso for consumido
+# [  5.500000 s] CONFERE  N nao muda ao trocar o sentido: previsto=2  observado=2  -> OK
+# [  6.000000 s] DIVISOR  sinal_div DESCE: tempo em alto = 500 ms (esperado 500 ms, duty 50%)  [OK]
+# [  6.500000 s] DIVISOR  sinal_div SOBE: periodo = 1000 ms (esperado 1000 ms, F = 1 Hz)  [OK]
+# [  6.500000 s] DIVISOR              tempo em baixo = 500 ms (esperado 500 ms)  [OK]
+# [  6.500000 s] DIVISOR              pulso_avanco = 1 durante 1 ciclo de clk (20 ns); o nucleo o consome na proxima borda
+# [  6.500000 s] CONFERE  N sobe no proximo avanco, ja no novo sentido: previsto=3  observado=3  -> OK
+# 
+# =====================================================================================
+#  ETAPA 4: MODOS DE VISUALIZACAO (N=3, P=4)
+# =====================================================================================
+#  REGRA: modo 00=N, 01=C-N, 10=P, 11=C. A troca de modo altera so a visualizacao.
+# [  6.500000 s] NUCLEO   pulso_avanco CONSUMIDO: sentido=colocar e N<C  -> N+1 (P acompanha se for novo recorde)
+# [  6.500000 s] NUCLEO   N: 2 -> 3 | P: 4 -> 4 | erro: 0 -> 0
+# [  6.500000 s] SAIDAS   display = 03 (modo 00) | LEDs: cheio=0 vazio=0 alerta=0 erro=0  [OK: igual ao modelo]
+# [  6.500000 s] CONFERE  modo 00 = N: previsto=3  observado=3  -> OK
+# [  6.500000 s] ENTRADA  modo = 01 (display mostra C - N, espacos disponiveis)
+# [  6.500000 s] SAIDAS   display = 27 (modo 01) | LEDs: cheio=0 vazio=0 alerta=0 erro=0  [OK: igual ao modelo]
+# [  6.500000 s] CONFERE  modo 01 = C - N: previsto=27  observado=27  -> OK
+# [  6.500000 s] ENTRADA  modo = 10 (display mostra P, pico desde o reset)
+# [  6.500000 s] SAIDAS   display = 04 (modo 10) | LEDs: cheio=0 vazio=0 alerta=0 erro=0  [OK: igual ao modelo]
+# [  6.500000 s] CONFERE  modo 10 = P: previsto=4  observado=4  -> OK
+# [  6.500000 s] ENTRADA  modo = 11 (display mostra C, capacidade)
+# [  6.500000 s] SAIDAS   display = 30 (modo 11) | LEDs: cheio=0 vazio=0 alerta=0 erro=0  [OK: igual ao modelo]
+# [  6.500000 s] CONFERE  modo 11 = C: previsto=30  observado=30  -> OK
+# [  6.500000 s] ENTRADA  modo = 00 (display mostra N, quantidade atual)
+# [  6.500000 s] SAIDAS   display = 03 (modo 00) | LEDs: cheio=0 vazio=0 alerta=0 erro=0  [OK: igual ao modelo]
+# 
+# =====================================================================================
+#  ETAPA 5: PAUSA
+# =====================================================================================
+#  REGRA: pausa=1 preserva N, P e erro, reinicia a fase do divisor e descarta avanco pendente. Pausa tem prioridade sobre o pulso.
+# [  6.500000 s] CENARIO  5a) pausa no MEIO de um periodo, com sinal_div em alto
+# [  7.000000 s] DIVISOR  sinal_div DESCE: tempo em alto = 500 ms (esperado 500 ms, duty 50%)  [OK]
+# [  7.500000 s] DIVISOR  sinal_div SOBE: periodo = 1000 ms (esperado 1000 ms, F = 1 Hz)  [OK]
+# [  7.500000 s] DIVISOR              tempo em baixo = 500 ms (esperado 500 ms)  [OK]
+# [  7.500000 s] DIVISOR              pulso_avanco = 1 durante 1 ciclo de clk (20 ns); o nucleo o consome na proxima borda
+# [  7.500000 s] CONFERE  N antes da pausa: previsto=4  observado=4  -> OK
+# [  7.500000 s] NUCLEO   pulso_avanco CONSUMIDO: sentido=colocar e N<C  -> N+1 (P acompanha se for novo recorde)
+# [  7.500000 s] NUCLEO   N: 3 -> 4 | P: 4 -> 4 | erro: 0 -> 0
+# [  7.500000 s] SAIDAS   display = 04 (modo 00) | LEDs: cheio=0 vazio=0 alerta=0 erro=0  [OK: igual ao modelo]
+# [  7.500000 s] ENTRADA  pausa = 1  PAUSA: preserva N, P e erro; divisor volta ao inicio; avanco pendente descartado
+# [  7.500000 s] DIVISOR  sinal_div DESCE a 0 forcado por pausa/reset: fase do divisor reiniciada
+# [  7.500000 s] CONFERE  sinal_div volta a 0 com a pausa: previsto=0  observado=0  -> OK
+# [  8.500000 s] CONFERE  N preservado durante a pausa (sem avanco): previsto=4  observado=4  -> OK
+# [  8.500000 s] DIVISOR  divisor liberado: contador em 0, sinal_div em 0 (conta 25000000 bordas ate a 1a subida)
+# [  8.500000 s] ENTRADA  pausa = 0  pausa liberada: divisor recomeca com sinal_div = 0
+# [  9.000000 s] DIVISOR  sinal_div SOBE (1a subida) apos 25000000 bordas de clk = 1 semiciclo (esperado 25000000)  [OK]
+# [  9.000000 s] DIVISOR              pulso_avanco = 1 durante 1 ciclo de clk (20 ns); o nucleo o consome na proxima borda
+# [  9.000000 s] CONFERE  1o avanco depois de retomar (fase reiniciada): previsto=5  observado=5  -> OK
+# [  9.000000 s] CENARIO  5b) pausa JUNTO de um avanco (pulso_avanco ativo)
+# [  9.000000 s] NUCLEO   pulso_avanco CONSUMIDO: sentido=colocar e N<C  -> N+1 (P acompanha se for novo recorde)
+# [  9.000000 s] NUCLEO   N: 4 -> 5 | P: 4 -> 5 | erro: 0 -> 0
+# [  9.000000 s] SAIDAS   display = 05 (modo 00) | LEDs: cheio=0 vazio=0 alerta=0 erro=0  [OK: igual ao modelo]
+# [  9.500000 s] DIVISOR  sinal_div DESCE: tempo em alto = 500 ms (esperado 500 ms, duty 50%)  [OK]
+# [ 10.000000 s] DIVISOR  sinal_div SOBE: periodo = 1000 ms (esperado 1000 ms, F = 1 Hz)  [OK]
+# [ 10.000000 s] DIVISOR              tempo em baixo = 500 ms (esperado 500 ms)  [OK]
+# [ 10.000000 s] DIVISOR              pulso_avanco = 1 durante 1 ciclo de clk (20 ns); o nucleo o consome na proxima borda
+# [ 10.000000 s] ENTRADA  pausa = 1  PAUSA: preserva N, P e erro; divisor volta ao inicio; avanco pendente descartado
+# [ 10.000000 s] DIVISOR  sinal_div DESCE a 0 forcado por pausa/reset: fase do divisor reiniciada
+# [ 10.000000 s] NUCLEO   pulso_avanco DESCARTADO: pausa=1 tem prioridade (N, P e erro preservados)
+# [ 10.000000 s] CONFERE  avanco descartado pela pausa: previsto=5  observado=5  -> OK
+# [ 10.000000 s] DIVISOR  divisor liberado: contador em 0, sinal_div em 0 (conta 25000000 bordas ate a 1a subida)
+# [ 10.000000 s] ENTRADA  pausa = 0  pausa liberada: divisor recomeca com sinal_div = 0
+# [ 10.500000 s] DIVISOR  sinal_div SOBE (1a subida) apos 25000000 bordas de clk = 1 semiciclo (esperado 25000000)  [OK]
+# [ 10.500000 s] DIVISOR              pulso_avanco = 1 durante 1 ciclo de clk (20 ns); o nucleo o consome na proxima borda
+# [ 10.500000 s] CONFERE  N avanca normalmente depois de retomar: previsto=6  observado=6  -> OK
+# 
+# =====================================================================================
+#  ETAPA 6: RESET ASSINCRONO
+# =====================================================================================
+#  REGRA: rst=1 tem prioridade sobre tudo, age entre bordas de clock e descarta um avanco em andamento.
+# [ 10.500000 s] CENARIO  6a) reset ENTRE bordas de clock (N=6, P=6)
+# [ 10.500000 s] NUCLEO   pulso_avanco CONSUMIDO: sentido=colocar e N<C  -> N+1 (P acompanha se for novo recorde)
+# [ 10.500000 s] NUCLEO   N: 5 -> 6 | P: 5 -> 6 | erro: 0 -> 0
+# [ 10.500000 s] SAIDAS   display = 06 (modo 00) | LEDs: cheio=0 vazio=0 alerta=0 erro=0  [OK: igual ao modelo]
+# [ 10.500000 s] DIVISOR  sinal_div DESCE a 0 forcado por pausa/reset: fase do divisor reiniciada
+# [ 10.500000 s] ENTRADA  rst = 1  RESET ASSINCRONO: zera N, P, erro e divisor na hora, sem esperar o clock
+# [ 10.500000 s] NUCLEO   RESET -> N: 6 -> 0 | P: 6 -> 0 | erro: 0 -> 0
+# [ 10.500000 s] SAIDAS   display = 00 (modo 00) | LEDs: cheio=0 vazio=1 alerta=0 erro=0  [OK: igual ao modelo]
+# [ 10.500000 s] CONFERE  N zerado sem esperar borda de clk: previsto=0  observado=0  -> OK
+# [ 10.500000 s] CONFERE  P zerado [modo 10]: previsto=0  observado=0  -> OK
+# [ 10.500000 s] CONFERE  sinal_div zerado: previsto=0  observado=0  -> OK
+# [ 10.500000 s] DIVISOR  divisor liberado: contador em 0, sinal_div em 0 (conta 25000000 bordas ate a 1a subida)
+# [ 10.500000 s] ENTRADA  rst = 0  reset liberado
+# [ 11.000000 s] DIVISOR  sinal_div SOBE (1a subida) apos 25000000 bordas de clk = 1 semiciclo (esperado 25000000)  [OK]
+# [ 11.000000 s] DIVISOR              pulso_avanco = 1 durante 1 ciclo de clk (20 ns); o nucleo o consome na proxima borda
+# [ 11.000000 s] CONFERE  1o avanco depois do reset (fase do divisor reiniciada): previsto=1  observado=1  -> OK
+# [ 11.000000 s] CENARIO  6b) reset JUNTO de um avanco (N iria de 1 para 2)
+# [ 11.000000 s] NUCLEO   pulso_avanco CONSUMIDO: sentido=colocar e N<C  -> N+1 (P acompanha se for novo recorde)
+# [ 11.000000 s] NUCLEO   N: 0 -> 1 | P: 0 -> 1 | erro: 0 -> 0
+# [ 11.000000 s] SAIDAS   display = 01 (modo 00) | LEDs: cheio=0 vazio=0 alerta=0 erro=0  [OK: igual ao modelo]
+# [ 11.500000 s] DIVISOR  sinal_div DESCE: tempo em alto = 500 ms (esperado 500 ms, duty 50%)  [OK]
+# [ 12.000000 s] DIVISOR  sinal_div SOBE: periodo = 1000 ms (esperado 1000 ms, F = 1 Hz)  [OK]
+# [ 12.000000 s] DIVISOR              tempo em baixo = 500 ms (esperado 500 ms)  [OK]
+# [ 12.000000 s] DIVISOR              pulso_avanco = 1 durante 1 ciclo de clk (20 ns); o nucleo o consome na proxima borda
+# [ 12.000000 s] DIVISOR  sinal_div DESCE a 0 forcado por pausa/reset: fase do divisor reiniciada
+# [ 12.000000 s] ENTRADA  rst = 1  RESET ASSINCRONO: zera N, P, erro e divisor na hora, sem esperar o clock
+# [ 12.000000 s] NUCLEO   RESET -> N: 1 -> 0 | P: 1 -> 0 | erro: 0 -> 0
+# [ 12.000000 s] SAIDAS   display = 00 (modo 00) | LEDs: cheio=0 vazio=1 alerta=0 erro=0  [OK: igual ao modelo]
+# [ 12.000000 s] CONFERE  avanco descartado pelo reset (N=0, e nao 2): previsto=0  observado=0  -> OK
+# [ 12.000000 s] CONFERE  P zerado [modo 10]: previsto=0  observado=0  -> OK
+# 
+# =====================================================================================
+#  ETAPA 7: LIMITE INFERIOR E ERRO PERSISTENTE
+# =====================================================================================
+#  REGRA: Retirar com N=0: N permanece em 0 e erro passa a 1. O erro so volta a 0 com reset.
+# [ 12.000000 s] CONFERE  erro antes da tentativa: previsto=0  observado=0  -> OK
+# [ 12.000000 s] DIVISOR  divisor liberado: contador em 0, sinal_div em 0 (conta 25000000 bordas ate a 1a subida)
+# [ 12.000000 s] ENTRADA  rst = 0  reset liberado
+# [ 12.000000 s] ENTRADA  sentido = 1  (retirar pecas)  - so e usado quando um pulso for consumido
+# [ 12.500000 s] DIVISOR  sinal_div SOBE (1a subida) apos 25000000 bordas de clk = 1 semiciclo (esperado 25000000)  [OK]
+# [ 12.500000 s] DIVISOR              pulso_avanco = 1 durante 1 ciclo de clk (20 ns); o nucleo o consome na proxima borda
+# [ 12.500000 s] CONFERE  N satura em 0: previsto=0  observado=0  -> OK
+# [ 12.500000 s] CONFERE  erro ativado: previsto=1  observado=1  -> OK
+# [ 12.500000 s] CONFERE  LED vazio: previsto=1  observado=1  -> OK
+# [ 12.500000 s] NUCLEO   pulso_avanco CONSUMIDO: sentido=retirar e N=0  -> N permanece em 0, erro passa a 1
+# [ 12.500000 s] NUCLEO   N: 0 -> 0 | P: 0 -> 0 | erro: 0 -> 1
+# [ 12.500000 s] SAIDAS   display = 00 (modo 00) | LEDs: cheio=0 vazio=1 alerta=0 erro=1  [OK: igual ao modelo]
+# [ 12.500000 s] ENTRADA  sentido = 0  (colocar pecas)  - so e usado quando um pulso for consumido
+# [ 13.000000 s] DIVISOR  sinal_div DESCE: tempo em alto = 500 ms (esperado 500 ms, duty 50%)  [OK]
+# [ 13.500000 s] DIVISOR  sinal_div SOBE: periodo = 1000 ms (esperado 1000 ms, F = 1 Hz)  [OK]
+# [ 13.500000 s] DIVISOR              tempo em baixo = 500 ms (esperado 500 ms)  [OK]
+# [ 13.500000 s] DIVISOR              pulso_avanco = 1 durante 1 ciclo de clk (20 ns); o nucleo o consome na proxima borda
+# [ 13.500000 s] CONFERE  N volta a subir: previsto=1  observado=1  -> OK
+# [ 13.500000 s] CONFERE  erro persiste ate o reset: previsto=1  observado=1  -> OK
+# [ 13.500000 s] NUCLEO   pulso_avanco CONSUMIDO: sentido=colocar e N<C  -> N+1 (P acompanha se for novo recorde)
+# [ 13.500000 s] NUCLEO   N: 0 -> 1 | P: 0 -> 1 | erro: 1 -> 1
+# [ 13.500000 s] SAIDAS   display = 01 (modo 00) | LEDs: cheio=0 vazio=0 alerta=0 erro=1  [OK: igual ao modelo]
+# [ 13.500000 s] DIVISOR  sinal_div DESCE a 0 forcado por pausa/reset: fase do divisor reiniciada
+# [ 13.500000 s] ENTRADA  rst = 1  RESET ASSINCRONO: zera N, P, erro e divisor na hora, sem esperar o clock
+# [ 13.500000 s] NUCLEO   RESET -> N: 1 -> 0 | P: 1 -> 0 | erro: 1 -> 0
+# [ 13.500000 s] SAIDAS   display = 00 (modo 00) | LEDs: cheio=0 vazio=1 alerta=0 erro=0  [OK: igual ao modelo]
+# [ 13.500000 s] CONFERE  reset limpa o erro: previsto=0  observado=0  -> OK
+# [ 13.500000 s] CONFERE  N apos o reset: previsto=0  observado=0  -> OK
+# 
+# =====================================================================================
+#  ETAPA 8: LIMITE SUPERIOR E INDICADORES (alerta, cheio, erro)
+# =====================================================================================
+#  REGRA: alerta=1 quando N>=L; cheio=1 quando N=C. Colocar com N=C: N permanece em C e erro passa a 1. P=C.
+# [ 13.500000 s] CENARIO  enchendo a bandeja ate C=30 (L=25)
+# [ 13.500000 s] DIVISOR  divisor liberado: contador em 0, sinal_div em 0 (conta 25000000 bordas ate a 1a subida)
+# [ 13.500000 s] ENTRADA  rst = 0  reset liberado
+# [ 14.000000 s] DIVISOR  sinal_div SOBE (1a subida) apos 25000000 bordas de clk = 1 semiciclo (esperado 25000000)  [OK]
+# [ 14.000000 s] DIVISOR              pulso_avanco = 1 durante 1 ciclo de clk (20 ns); o nucleo o consome na proxima borda
+# [ 14.000000 s] NUCLEO   pulso_avanco CONSUMIDO: sentido=colocar e N<C  -> N+1 (P acompanha se for novo recorde)
+# [ 14.000000 s] NUCLEO   N: 0 -> 1 | P: 0 -> 1 | erro: 0 -> 0
+# [ 14.000000 s] SAIDAS   display = 01 (modo 00) | LEDs: cheio=0 vazio=0 alerta=0 erro=0  [OK: igual ao modelo]
+# Break key hit
+# Simulation stop requested.
+# End time: 19:50:39 on Oct 13,2026, Elapsed time: 0:43:35
+# Errors: 0, Warnings: 1
