@@ -1,0 +1,133 @@
+# Reading pref.tcl
+# //  Questa Altera Starter FPGA Edition-64
+# //  Version 2025.2 win64 May 31 2025
+# //
+# // Unpublished work. Copyright 2025 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# do controlador_esteira_run_msim_rtl_vhdl.do
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Questa Altera Starter FPGA Edition-64 vmap 2025.2 Lib Mapping Utility 2025.05 May 31 2025
+# vmap work rtl_work 
+# ** Note: (vmap-220) 'c:/altera_lite/25.1std/questa_fse/win64/../modelsim.ini' is used as the ini file.
+# Copying c:/altera_lite/25.1std/questa_fse/win64/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# 
+# vcom -93 -work work {C:/Users/orlando/Documents/repgit/dlp-du-mal/quartus/controlador_esteira.vhd}
+# Questa Altera Starter FPGA Edition-64 vcom 2025.2 Compiler 2025.05 May 31 2025
+# Start time: 18:21:58 on Oct 15,2026
+# vcom -reportprogress 300 -93 -work work C:/Users/orlando/Documents/repgit/dlp-du-mal/quartus/controlador_esteira.vhd 
+# ** Note: (vcom-220) 'modelsim.ini' is used as the ini file.
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity decodificador_7seg
+# -- Compiling architecture rtl of decodificador_7seg
+# -- Compiling entity controlador_esteira
+# -- Compiling architecture rtl of controlador_esteira
+# -- Loading entity decodificador_7seg
+# End time: 18:21:58 on Oct 15,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+# vcom -93 -work work {C:/Users/orlando/Documents/repgit/dlp-du-mal/quartus/tb_controlador_esteira.vhd}
+# Questa Altera Starter FPGA Edition-64 vcom 2025.2 Compiler 2025.05 May 31 2025
+# Start time: 18:21:58 on Oct 15,2026
+# vcom -reportprogress 300 -93 -work work C:/Users/orlando/Documents/repgit/dlp-du-mal/quartus/tb_controlador_esteira.vhd 
+# ** Note: (vcom-220) 'modelsim.ini' is used as the ini file.
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_controlador_esteira
+# -- Compiling architecture sim of tb_controlador_esteira
+# -- Loading entity controlador_esteira
+# -- Loading entity decodificador_7seg
+# End time: 18:21:58 on Oct 15,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+# vsim -t 1ps -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L cyclonev -L cyclonev_hssi -L rtl_work -L work -voptargs="+acc"  tb_controlador_esteira
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim -t 1ps -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L cyclonev -L cyclonev_hssi -L rtl_work -L work -voptargs=""+acc"" tb_controlador_esteira 
+# Start time: 18:21:58 on Oct 15,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10908) Some optimizations are turned off because the +acc switch is in effect.
+# ** Note: (vopt-220) 'modelsim.ini' is used as the ini file.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.tb_controlador_esteira(sim)#1
+# Loading work.controlador_esteira(rtl)#1
+# Loading work.decodificador_7seg(rtl)#1
+# 
+# add wave *
+# view structure
+# .main_pane.structure.interior.cs.body.struct
+# view signals
+# .main_pane.objects.interior.cs.body.tree
+# run -all
+# 
+#####################################################################################
+#  DEBUG DA ESTEIRA - clock REAL de 50 MHz, sem parametros reduzidos
+#####################################################################################
+#  Parametros: C=40  L=30  F=1 Hz  clock=50 MHz
+#  Divisor: semiciclo = 25000000 ciclos de clk = 500 ms | periodo de sinal_div = 1000 ms | contador conta de 0 a 24999999
+#  Cada avanco da esteira leva 1000 ms de tempo simulado.
+#  Legenda: CENARIO / ENTRADA / DIVISOR / NUCLEO (regra do PDF) / SAIDAS (hardware) / CONFERE / FALHA
+# 
+# =====================================================================================
+#  ETAPA 1: RESET E ESTADO INICIAL
+# =====================================================================================
+#  REGRA: rst=1 zera N, P, erro e o divisor. Apos o reset: modos 00 e 10 mostram 00; modos 01 e 11 mostram C.
+# [  0.000000 s] ENTRADA  rst = 1  RESET ASSINCRONO: zera N, P, erro e divisor na hora, sem esperar o clock
+# [  0.000000 s] SAIDAS   display = 00 (modo 00) | LEDs: cheio=0 vazio=1 alerta=0 erro=0  [OK: igual ao modelo]
+# [  0.000000 s] DIVISOR  divisor liberado: contador em 0, sinal_div em 0 (conta 25000000 bordas ate a 1a subida)
+# [  0.000000 s] ENTRADA  rst = 0  reset liberado
+# [  0.000000 s] CONFERE  N apos o reset [modo 00]: previsto=0  observado=0  -> OK
+# [  0.000000 s] CONFERE  C - N apos o reset [modo 01]: previsto=40  observado=40  -> OK
+# [  0.000000 s] CONFERE  P apos o reset [modo 10]: previsto=0  observado=0  -> OK
+# [  0.000000 s] CONFERE  C apos o reset [modo 11]: previsto=40  observado=40  -> OK
+# [  0.000000 s] CONFERE  LED vazio: previsto=1  observado=1  -> OK
+# [  0.000000 s] CONFERE  LED cheio: previsto=0  observado=0  -> OK
+# [  0.000000 s] CONFERE  LED alerta: previsto=0  observado=0  -> OK
+# [  0.000000 s] CONFERE  LED erro: previsto=0  observado=0  -> OK
+# [  0.000000 s] CONFERE  LED sinal_div: previsto=0  observado=0  -> OK
+# 
+# =====================================================================================
+#  ETAPA 2: DIVISOR DE FREQUENCIA E CONTAGEM CRESCENTE (colocar pecas)
+# =====================================================================================
+#  REGRA: sinal_div: onda quadrada de F Hz com 50% de duty; 1a subida apos 1 semiciclo. Cada subida gera 1 pulso_avanco e N+1.
+# [  0.500000 s] DIVISOR  sinal_div SOBE (1a subida) apos 25000000 bordas de clk = 1 semiciclo (esperado 25000000)  [OK]
+# [  0.500000 s] DIVISOR              pulso_avanco = 1 durante 1 ciclo de clk (20 ns); o nucleo o consome na proxima borda
+# [  0.500000 s] CONFERE  N apos a subida 1: previsto=1  observado=1  -> OK
+# [  0.500000 s] NUCLEO   pulso_avanco CONSUMIDO: sentido=colocar e N<C  -> N+1 (P acompanha se for novo recorde)
+# [  0.500000 s] NUCLEO   N: 0 -> 1 | P: 0 -> 1 | erro: 0 -> 0
+# [  0.500000 s] SAIDAS   display = 01 (modo 00) | LEDs: cheio=0 vazio=0 alerta=0 erro=0  [OK: igual ao modelo]
+# [  0.500000 s] CONFERE  P acompanha o maior N [modo 10]: previsto=1  observado=1  -> OK
+# [  1.000000 s] DIVISOR  sinal_div DESCE: tempo em alto = 500 ms (esperado 500 ms, duty 50%)  [OK]
+# [  1.500000 s] DIVISOR  sinal_div SOBE: periodo = 1000 ms (esperado 1000 ms, F = 1 Hz)  [OK]
+# [  1.500000 s] DIVISOR              tempo em baixo = 500 ms (esperado 500 ms)  [OK]
+# [  1.500000 s] DIVISOR              pulso_avanco = 1 durante 1 ciclo de clk (20 ns); o nucleo o consome na proxima borda
+# [  1.500000 s] CONFERE  N apos a subida 2: previsto=2  observado=2  -> OK
+# [  1.500000 s] NUCLEO   pulso_avanco CONSUMIDO: sentido=colocar e N<C  -> N+1 (P acompanha se for novo recorde)
+# [  1.500000 s] NUCLEO   N: 1 -> 2 | P: 1 -> 2 | erro: 0 -> 0
+# [  1.500000 s] SAIDAS   display = 02 (modo 00) | LEDs: cheio=0 vazio=0 alerta=0 erro=0  [OK: igual ao modelo]
+# [  1.500000 s] CONFERE  P acompanha o maior N [modo 10]: previsto=2  observado=2  -> OK
+# Break key hit
+# Simulation stop requested.
+# End time: 18:29:59 on Oct 15,2026, Elapsed time: 0:08:01
+# Errors: 0, Warnings: 1
